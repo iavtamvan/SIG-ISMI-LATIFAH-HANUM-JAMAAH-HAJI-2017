@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>>Jamaah Haji Kab.Semarang 2017 - Amentities</title>
+	<link rel="icon" href="../img/Fevicon.png" type="image/png">
+
+  <link rel="stylesheet" href="../vendors/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="../vendors/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="../vendors/themify-icons/themify-icons.css">
+  <link rel="stylesheet" href="../vendors/linericon/style.css">
+  <link rel="stylesheet" href="../vendors/owl-carousel/owl.theme.default.min.css">
+  <link rel="stylesheet" href="../vendors/owl-carousel/owl.carousel.min.css">
+  <link rel="stylesheet" href="../css/magnific-popup.css">
+  <link rel="stylesheet" href="../vendors/flat-icon/font/flaticon.css">
+  <link rel="stylesheet" href="../vendors/nice-select/nice-select.css">
+  <link rel="stylesheet" href="../css/style.css">
+
+
+  <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+  <link rel="stylesheet" href="css/qgis2web.css">
+  <style>
+    html, body, #map {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 50px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!--================ Header Menu Area start =================-->
+  <header class="header_area">
+      <div class="main_menu">
+          <nav class="navbar navbar-expand-lg navbar-light">
+              <div class="container box_1620">
+                  <!--<a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>-->
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+
+                  <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                      <ul class="nav navbar-nav menu_nav justify-content-end">
+                          <li class="nav-item active"><a class="nav-link" href="../index.html">Home</a></li>
+                          <li class="nav-item submenu dropdown">
+                              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                 aria-expanded="false">Peta Tematik</a>
+                              <ul class="dropdown-menu">
+                                  <li class="nav-item"><a class="nav-link" href="../jamaah2017/">Jamaah Haji 2017</a>
+                              </ul>
+                          </li>
+                          <li class="nav-item"><a class="nav-link" href="../contact.html">Contact</a></li>
+                          <li class="nav-item"><a class="nav-link" href="../about.html">About</a></li>
+                      </ul>
+
+                      <div class="nav-right text-center text-lg-right py-4 py-lg-0">
+                          <a class="button" href="#">Lihat Peta Tematik</a>
+                      </div>
+                  </div>
+              </div>
+          </nav>
+      </div>
+  </header>
+  <!--================Header Menu Area =================-->
+
+
+
+  <!--================Hero Banner SM Area Start =================-->
+  <!--================Hero Banner SM Area End =================-->
+
+
+  <!--================Service Area Start =================-->
+  <section id="map">
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/JumlahJamaahHajiKabSeamrang2017_0.js"></script>
+        <script>
+            var highlightLayer;
+            function highlightFeature(e) {
+                highlightLayer = e.target;
+                highlightLayer.openPopup();
+            }
+            var map = L.map('map', {
+                zoomControl:true, maxZoom:26, minZoom:1
+            }).fitBounds([[-7.49466810411,110.220354337],[-7.05424274819,111.025786344]]);
+            var hash = new L.Hash(map);
+            map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
+            L.control.locate().addTo(map);
+            var bounds_group = new L.featureGroup([]);
+            var basemap0 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+                maxZoom: 26
+            });
+            basemap0.addTo(map);
+            function setBounds() {
+            }
+            function pop_JumlahJamaahHajiKabSeamrang2017_0(feature, layer) {
+                layer.on({
+                    mouseout: function(e) {
+                        if (typeof layer.closePopup == 'function') {
+                            layer.closePopup();
+                        } else {
+                            layer.eachLayer(function(feature){
+                                feature.closePopup()
+                            });
+                        }
+                    },
+                    mouseover: highlightFeature,
+                });
+                var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>kecamatan</strong><br />' + (feature.properties['kecamatan'] !== null ? Autolinker.link(String(feature.properties['kecamatan'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Pendaftar</strong><br />' + (feature.properties['Pendaftar'] !== null ? Autolinker.link(String(feature.properties['Pendaftar'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>M_Keluar</strong><br />' + (feature.properties['M_Keluar'] !== null ? Autolinker.link(String(feature.properties['M_Keluar'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>M_Masuk</strong><br />' + (feature.properties['M_Masuk'] !== null ? Autolinker.link(String(feature.properties['M_Masuk'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Tunda</strong><br />' + (feature.properties['Tunda'] !== null ? Autolinker.link(String(feature.properties['Tunda'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Meninggal</strong><br />' + (feature.properties['Meninggal'] !== null ? Autolinker.link(String(feature.properties['Meninggal'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Jumlah</strong><br />' + (feature.properties['Jumlah'] !== null ? Autolinker.link(String(feature.properties['Jumlah'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+                layer.bindPopup(popupContent, {maxHeight: 400});
+            }
+
+            function style_JumlahJamaahHajiKabSeamrang2017_0_0(feature) {
+                if (feature.properties['Jumlah'] >= 0.000000 && feature.properties['Jumlah'] <= 24.600000 ) {
+                    return {
+                        pane: 'pane_JumlahJamaahHajiKabSeamrang2017_0',
+                        opacity: 1,
+                        color: 'rgba(0,0,0,1.0)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
+                        fillOpacity: 1,
+                        fillColor: 'rgba(247,251,255,1.0)',
+                    }
+                }
+                if (feature.properties['Jumlah'] >= 24.600000 && feature.properties['Jumlah'] <= 49.200000 ) {
+                    return {
+                        pane: 'pane_JumlahJamaahHajiKabSeamrang2017_0',
+                        opacity: 1,
+                        color: 'rgba(0,0,0,1.0)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
+                        fillOpacity: 1,
+                        fillColor: 'rgba(200,221,240,1.0)',
+                    }
+                }
+                if (feature.properties['Jumlah'] >= 49.200000 && feature.properties['Jumlah'] <= 73.800000 ) {
+                    return {
+                        pane: 'pane_JumlahJamaahHajiKabSeamrang2017_0',
+                        opacity: 1,
+                        color: 'rgba(0,0,0,1.0)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
+                        fillOpacity: 1,
+                        fillColor: 'rgba(115,179,216,1.0)',
+                    }
+                }
+                if (feature.properties['Jumlah'] >= 73.800000 && feature.properties['Jumlah'] <= 98.400000 ) {
+                    return {
+                        pane: 'pane_JumlahJamaahHajiKabSeamrang2017_0',
+                        opacity: 1,
+                        color: 'rgba(0,0,0,1.0)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
+                        fillOpacity: 1,
+                        fillColor: 'rgba(40,121,185,1.0)',
+                    }
+                }
+                if (feature.properties['Jumlah'] >= 98.400000 && feature.properties['Jumlah'] <= 123.000000 ) {
+                    return {
+                        pane: 'pane_JumlahJamaahHajiKabSeamrang2017_0',
+                        opacity: 1,
+                        color: 'rgba(0,0,0,1.0)',
+                        dashArray: '',
+                        lineCap: 'butt',
+                        lineJoin: 'miter',
+                        weight: 1.0,
+                        fill: true,
+                        fillOpacity: 1,
+                        fillColor: 'rgba(8,48,107,1.0)',
+                    }
+                }
+            }
+            map.createPane('pane_JumlahJamaahHajiKabSeamrang2017_0');
+            map.getPane('pane_JumlahJamaahHajiKabSeamrang2017_0').style.zIndex = 400;
+            map.getPane('pane_JumlahJamaahHajiKabSeamrang2017_0').style['mix-blend-mode'] = 'normal';
+            var layer_JumlahJamaahHajiKabSeamrang2017_0 = new L.geoJson(json_JumlahJamaahHajiKabSeamrang2017_0, {
+                attribution: '<a href=""></a>',
+                pane: 'pane_JumlahJamaahHajiKabSeamrang2017_0',
+                onEachFeature: pop_JumlahJamaahHajiKabSeamrang2017_0,
+                style: style_JumlahJamaahHajiKabSeamrang2017_0_0,
+            });
+            bounds_group.addLayer(layer_JumlahJamaahHajiKabSeamrang2017_0);
+            map.addLayer(layer_JumlahJamaahHajiKabSeamrang2017_0);
+            var baseMaps = {};
+            L.control.layers(baseMaps,{'Jumlah Jamaah Haji Kab.Seamrang 2017<br /><table><tr><td style="text-align: center;"><img src="legend/JumlahJamaahHajiKabSeamrang2017_0_0250.png" /></td><td> 0 - 25 </td></tr><tr><td style="text-align: center;"><img src="legend/JumlahJamaahHajiKabSeamrang2017_0_25491.png" /></td><td> 25 - 49 </td></tr><tr><td style="text-align: center;"><img src="legend/JumlahJamaahHajiKabSeamrang2017_0_49742.png" /></td><td> 49 - 74 </td></tr><tr><td style="text-align: center;"><img src="legend/JumlahJamaahHajiKabSeamrang2017_0_74983.png" /></td><td> 74 - 98 </td></tr><tr><td style="text-align: center;"><img src="legend/JumlahJamaahHajiKabSeamrang2017_0_981234.png" /></td><td> 98 - 123 </td></tr></table>': layer_JumlahJamaahHajiKabSeamrang2017_0,},{collapsed:false}).addTo(map);
+            setBounds();
+            var i = 0;
+            layer_JumlahJamaahHajiKabSeamrang2017_0.eachLayer(function(layer) {
+                var context = {
+                    feature: layer.feature,
+                    variables: {}
+                };
+                layer.bindTooltip((layer.feature.properties['kecamatan'] !== null?String('<div style="color: #000000; font-size: 8pt; font-weight: bold; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['kecamatan']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_JumlahJamaahHajiKabSeamrang2017_0'});
+                labels.push(layer);
+                totalMarkers += 1;
+                layer.added = true;
+                addLabel(layer, i);
+                i++;
+            });
+            resetLabels([layer_JumlahJamaahHajiKabSeamrang2017_0]);
+            map.on("zoomend", function(){
+                resetLabels([layer_JumlahJamaahHajiKabSeamrang2017_0]);
+            });
+            map.on("layeradd", function(){
+                resetLabels([layer_JumlahJamaahHajiKabSeamrang2017_0]);
+            });
+            map.on("layerremove", function(){
+                resetLabels([layer_JumlahJamaahHajiKabSeamrang2017_0]);
+            });
+        </script>
+  </section>
+  <!--================Service Area End =================-->
+
+
+  <!--================Testimonial section Start =================-->
+
+  <!--================Testimonial section End =================-->
+
+
+
+
+
+
+  <!-- ================ start footer Area ================= -->
+
+  <footer class="footer-area">
+      <div class="container">
+
+          <div class="footer-bottom">
+              <div class="row align-items-center">
+                  <p class="col-lg-8 col-sm-12 footer-text m-0 text-center text-lg-left"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                      Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | SIG is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://google.com" target="_blank">Ismi Latifah Hanum</a>
+                      <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+              </div>
+          </div>
+      </div>
+  </footer>
+  <!-- ================ End footer Area ================= -->
+
+
+
+
+  <script src="../vendors/jquery/jquery-3.2.1.min.js"></script>
+  <script src="../vendors/bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="../vendors/owl-carousel/owl.carousel.min.js"></script>
+  <script src="../vendors/Magnific-Popup/jquery.magnific-popup.min.js"></script>
+  <script src="../vendors/nice-select/jquery.nice-select.min.js"></script>
+  <script src="../js/jquery.ajaxchimp.min.js"></script>
+  <script src="../js/mail-script.js"></script>
+  <script src="../js/skrollr.min.js"></script>
+  <!-- <script src="js/countdown.js"></script> -->
+  <script src="../js/jquery.magnific-popup.min.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
